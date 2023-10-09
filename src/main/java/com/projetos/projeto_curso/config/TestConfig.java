@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.projetos.projeto_curso.entities.Category;
 import com.projetos.projeto_curso.entities.Order;
+import com.projetos.projeto_curso.entities.OrderItem;
 import com.projetos.projeto_curso.entities.Product;
 import com.projetos.projeto_curso.entities.User;
 import com.projetos.projeto_curso.entities.enums.OrderStatus;
 import com.projetos.projeto_curso.repositories.CategoryRepository;
+import com.projetos.projeto_curso.repositories.OrderItemRepository;
 import com.projetos.projeto_curso.repositories.OrderRepository;
 import com.projetos.projeto_curso.repositories.ProductRepository;
 import com.projetos.projeto_curso.repositories.UserRepository;
@@ -27,6 +29,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository OrderItemRepository;
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -69,6 +74,12 @@ public class TestConfig implements CommandLineRunner{
 		p5.getCategories().add(cat2);
 		
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice()); 
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice()); 
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice()); 
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
+		OrderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 	}
 	
 	
